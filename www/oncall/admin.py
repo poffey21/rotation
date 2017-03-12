@@ -1,25 +1,19 @@
-from django import forms
 from django.contrib import admin
 
 from . import models
-from . import widgets
-
-
-class ContactPreferenceForm(forms.ModelForm):
-
-    class Meta:
-        model = models.ContactPreference
-        widgets = {
-            'days_of_week': widgets.DaysOfWeekInput(),
-        }
-        fields = '__all__'
+from . import forms
 
 
 class ContactPreferenceAdmin(admin.ModelAdmin):
-  form = ContactPreferenceForm
+  form = forms.ContactPreferenceForm
 
 
-admin.site.register(models.Rotation)
+
+class RotationAdmin(admin.ModelAdmin):
+  form = forms.RotationForm
+
+
+admin.site.register(models.Rotation, RotationAdmin)
 admin.site.register(models.ContactMethod)
 admin.site.register(models.ContactPreference, ContactPreferenceAdmin)
 admin.site.register(models.UserProfile)
