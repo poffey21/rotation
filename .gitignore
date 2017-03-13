@@ -92,3 +92,4 @@ ENV/
 
 *.sqlite3
 .idea/
+www/external/

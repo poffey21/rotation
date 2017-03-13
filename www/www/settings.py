@@ -12,8 +12,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 import environ
+from os import path
+
 root = environ.Path(__file__) - 3 # three folder back (/a/b/c/ - 3 = /)
-env = environ.Env(DEBUG=(bool, False),) # set default values and casting
+env = environ.Env(DJANGO_DEBUG=(bool, False),) # set default values and casting
 environ.Env.read_env() # reading .env file
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -28,7 +30,7 @@ SITE_ROOT = root()
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     'schedule',
     # Homegrown
     'oncall',
+    'external',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +131,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EXTERNAL_DB_HOST = env('DJANGO_EXTERNAL_DB_HOST')
+EXTERNAL_DB_NAME = env('DJANGO_EXTERNAL_DB_NAME')
+EXTERNAL_DB_USER = env('DJANGO_EXTERNAL_DB_USER')
+EXTERNAL_DB_PASS = env('DJANGO_EXTERNAL_DB_PASS')

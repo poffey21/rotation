@@ -1,0 +1,8 @@
+{% extends 'vendors/bootstrap/dashboard.html' %}
+
+{% block navigation_ul %}
+    <li><a href="#">Dashboard</a></li>
+    <li><a href="#">Settings</a></li>
+    <li><a href="{% url 'oncall:profile-detail' %}">Profile</a></li>
+    <li><a href="#">Help</a></li>
+{% endblock navigation_ul %}
