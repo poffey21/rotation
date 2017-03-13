@@ -54,6 +54,12 @@ class ContactMethod(models.Model):
     method = models.CharField('Email/Phone/Text', choices=CONTACT_METHOD_OPTIONS, max_length=16)
     details = models.CharField(max_length=64)
 
+    def __str__(self):
+        return '{}: {}'.format(self.get_method_display(), self.details)
+
+    def __unicode__(self):
+        return self.__str__()
+
 
 class ContactPreference(Duty):
     user = models.ForeignKey('auth.User')
@@ -61,7 +67,8 @@ class ContactPreference(Duty):
 
     def validate_unique(self, *args, **kwargs):
         # TODO: filter only a ingle user schedules
-        super(Duty, self).validate_unique(*args, **kwargs)
+        qs = self.__class__._default_manager.filter(user=self.user)
+        super(Duty, self).validate_unique(qs=qs, *args, **kwargs)
 
 class UsersInRotation(models.Model):
     user = models.ForeignKey('auth.User')

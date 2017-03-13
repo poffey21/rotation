@@ -5,12 +5,12 @@ from . import forms
 
 
 class ContactPreferenceAdmin(admin.ModelAdmin):
-  form = forms.ContactPreferenceForm
+  form = forms.ContactPreferenceAdminForm
 
 
 
 class RotationAdmin(admin.ModelAdmin):
-  form = forms.RotationForm
+  form = forms.RotationAdminForm
 
 
 admin.site.register(models.Rotation, RotationAdmin)
