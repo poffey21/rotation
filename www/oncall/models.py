@@ -162,9 +162,14 @@ class Rotation(Duty):
 
 
 class RotationsInBundle(models.Model):
+    SUPPORT_LEVELS = (
+        ('1', 'Tier 2'),
+        ('2', 'Tier 3'),
+        ('3', 'Management'),
+    )
     bundle = models.ForeignKey('oncall.Bundle')
     rotation = models.ForeignKey('oncall.Rotation')
-    order = models.IntegerField('Order in the rotation')
+    order = models.IntegerField('Order in the rotation', choices=SUPPORT_LEVELS)
 
 
 class Bundle(models.Model):
